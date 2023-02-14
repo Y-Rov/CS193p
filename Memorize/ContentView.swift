@@ -25,10 +25,61 @@ struct ContentView: View {
                 }
             }
             .foregroundColor(.red)
-            .font(.largeTitle)
-            .padding(.horizontal)
+            Spacer()
+            HStack {
+                Spacer()
+                vehicleThemeButton
+                Spacer()
+                buildingThemeButton
+                Spacer()
+                foodThemeButton
+                Spacer()
+                animalThemeButton
+                Spacer()
+            }
         }
         .padding(.horizontal)
+    }
+    
+    var vehicleThemeButton: some View {
+        Button(action: {
+            
+        }, label: {
+            createButtonLabel(imageName: "car", caption: "Vehicles")
+        })
+    }
+    
+    var buildingThemeButton: some View {
+        Button(action: {
+            
+        }, label: {
+            createButtonLabel(imageName: "house", caption: "Buildings")
+        })
+    }
+    
+    var foodThemeButton: some View {
+        Button(action: {
+            
+        }, label: {
+            createButtonLabel(imageName: "fork.knife", caption: "Food")
+        })
+    }
+    
+    var animalThemeButton: some View {
+        Button(action: {
+            
+        }, label: {
+            createButtonLabel(imageName: "pawprint", caption: "Animals")
+        })
+    }
+    
+    func createButtonLabel(imageName: String, caption: String) -> some View {
+        VStack {
+            Image(systemName: imageName)
+                .font(.title)
+            Text(caption)
+                .font(.caption)
+        }
     }
 }
 
