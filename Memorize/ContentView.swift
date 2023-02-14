@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🚀", "🚁", "🛸", "🛺", "🚒", "🚓", "🚕", "🚙", "🚅", "🚈", "🛵", "🚜", "🚐"]
+    var vehicles = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🚀", "🛸", "🚁"]
+    var buildings = ["🏠", "🏨", "💒", "🏣", "🏭", "🏪", "🏦", "🕌", "🏩", "🏛", "🏬", "🕍", "🏥", "⛩"]
+    var food = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🍒", "🥥", "🍑", "🍆", "🥑", "🥦", "🥕"]
+    var animals = ["🐍", "🦎", "🦖", "🐙", "🐳", "🐬", "🐊", "🐝", "🐴", "🐺", "🦇", "🦋", "🦆", "🦄"]
     
-    @State var emojiCount = 24
+    @State var emojiCount = 14
     
     var body: some View {
         VStack {
@@ -18,7 +21,7 @@ struct ContentView: View {
                 .font(.largeTitle)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(vehicles[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
