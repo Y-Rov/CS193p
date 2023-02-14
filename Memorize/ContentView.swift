@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🚀",
-                  "🚁", "🛸", "🛺", "🚒", "🚓", "🚕", "🚙", "🚅", "🚈", "🛵", "🚜", "🚐"]
+    var vehicles = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🛸", "🚁"]
+    var buildings = ["🏠", "🏨", "💒", "🏣", "🏭", "🏪", "🏦", "🕌", "🏩", "🏛", "🏬", "🕍", "🏥", "⛩"]
+    var food = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🍒", "🥥", "🍑", "🍆", "🥑", "🥦", "🥕", "🥐"]
+    var animals = ["🐍", "🦎", "🦖", "🐙", "🐳", "🐬", "🐊", "🐝", "🐴", "🐺", "🦇", "🦋", "🦆", "🦄", "🐉", "🐈"]
     
-    @State var emojiCount = 24
+    @State var emojis = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🛸", "🚁"]
+    
+    @State var emojiCount = 4;
+    let minEmojiCount = 4;
     
     var body: some View {
         VStack {
+            Text("Memorize!")
+                .font(.largeTitle)
+                .padding(.vertical)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
@@ -26,34 +34,64 @@ struct ContentView: View {
             .foregroundColor(.red)
             Spacer()
             HStack {
-                removeButton
                 Spacer()
-                addButton
+                vehicleThemeButton
+                Spacer()
+                buildingThemeButton
+                Spacer()
+                foodThemeButton
+                Spacer()
+                animalThemeButton
+                Spacer()
             }
-            .font(.largeTitle)
-            .padding(.horizontal)
         }
         .padding(.horizontal)
     }
     
-    var removeButton: some View {
-        Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
-        } label: {
-            Image(systemName: "minus.circle")
-        }
+    var vehicleThemeButton: some View {
+        Button(action: {
+            emojis = vehicles.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<vehicles.count)
+        }, label: {
+            createButtonLabel(imageName: "car", caption: "Vehicles")
+        })
     }
     
-    var addButton: some View {
-        Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-        } label: {
-            Image(systemName: "plus.circle")
+    var buildingThemeButton: some View {
+        Button(action: {
+            emojis = buildings.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<buildings.count)
+        }, label: {
+            createButtonLabel(imageName: "house", caption: "Buildings")
+        })
+    }
+    
+    var foodThemeButton: some View {
+        Button(action: {
+            emojis = food.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<food.count)
+        }, label: {
+            createButtonLabel(imageName: "fork.knife", caption: "Food")
+        })
+    }
+    
+    var animalThemeButton: some View {
+        Button(action: {
+            emojis = animals.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<animals.count)
+        }, label: {
+            createButtonLabel(imageName: "pawprint", caption: "Animals")
+        })
+    }
+    
+    func createButtonLabel(imageName: String, caption: String) -> some View {
+        VStack {
+            Image(systemName: imageName)
+                .font(.largeTitle)
+            Text(caption)
+                .font(.caption)
         }
+        .padding(.horizontal)
     }
 }
 
@@ -81,9 +119,16 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice("iPhone 14")
             .preferredColorScheme(.light)
         ContentView()
+            .previewDevice("iPhone 14 Plus")
+            .preferredColorScheme(.light)
+        ContentView()
+            .previewDevice("iPhone 14 Pro")
             .preferredColorScheme(.dark)
-            
+        ContentView()
+            .previewDevice("iPhone 14 Pro Max")
+            .preferredColorScheme(.dark)
     }
 }
