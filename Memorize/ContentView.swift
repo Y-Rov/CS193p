@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var vehicles = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🚀", "🛸", "🚁"]
+    var vehicles = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🛸", "🚁"]
     var buildings = ["🏠", "🏨", "💒", "🏣", "🏭", "🏪", "🏦", "🕌", "🏩", "🏛", "🏬", "🕍", "🏥", "⛩"]
-    var food = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🍒", "🥥", "🍑", "🍆", "🥑", "🥦", "🥕"]
-    var animals = ["🐍", "🦎", "🦖", "🐙", "🐳", "🐬", "🐊", "🐝", "🐴", "🐺", "🦇", "🦋", "🦆", "🦄"]
+    var food = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🍒", "🥥", "🍑", "🍆", "🥑", "🥦", "🥕", "🥐"]
+    var animals = ["🐍", "🦎", "🦖", "🐙", "🐳", "🐬", "🐊", "🐝", "🐴", "🐺", "🦇", "🦋", "🦆", "🦄", "🐉", "🐈"]
     
-    @State var emojiCount = 14
+    @State var emojis = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🛸", "🚁"]
+    
+    @State var emojiCount = 4;
+    let minEmojiCount = 4;
     
     var body: some View {
         VStack {
             Text("Memorize!")
                 .font(.largeTitle)
+                .padding(.vertical)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
-                    ForEach(vehicles[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
@@ -46,7 +50,8 @@ struct ContentView: View {
     
     var vehicleThemeButton: some View {
         Button(action: {
-            
+            emojis = vehicles.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<vehicles.count)
         }, label: {
             createButtonLabel(imageName: "car", caption: "Vehicles")
         })
@@ -54,7 +59,8 @@ struct ContentView: View {
     
     var buildingThemeButton: some View {
         Button(action: {
-            
+            emojis = buildings.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<buildings.count)
         }, label: {
             createButtonLabel(imageName: "house", caption: "Buildings")
         })
@@ -62,7 +68,8 @@ struct ContentView: View {
     
     var foodThemeButton: some View {
         Button(action: {
-            
+            emojis = food.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<food.count)
         }, label: {
             createButtonLabel(imageName: "fork.knife", caption: "Food")
         })
@@ -70,7 +77,8 @@ struct ContentView: View {
     
     var animalThemeButton: some View {
         Button(action: {
-            
+            emojis = animals.shuffled()
+            emojiCount = Int.random(in: minEmojiCount..<animals.count)
         }, label: {
             createButtonLabel(imageName: "pawprint", caption: "Animals")
         })
@@ -79,10 +87,11 @@ struct ContentView: View {
     func createButtonLabel(imageName: String, caption: String) -> some View {
         VStack {
             Image(systemName: imageName)
-                .font(.title)
+                .font(.largeTitle)
             Text(caption)
                 .font(.caption)
         }
+        .padding(.horizontal)
     }
 }
 
@@ -110,9 +119,16 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewDevice("iPhone 14")
             .preferredColorScheme(.light)
         ContentView()
+            .previewDevice("iPhone 14 Plus")
+            .preferredColorScheme(.light)
+        ContentView()
+            .previewDevice("iPhone 14 Pro")
             .preferredColorScheme(.dark)
-            
+        ContentView()
+            .previewDevice("iPhone 14 Pro Max")
+            .preferredColorScheme(.dark)
     }
 }
