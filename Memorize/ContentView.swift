@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let game: EmojiMemoryGame
+    
     var vehicles = ["🚄", "🚃", "🚠", "🚌", "🚎", "🚗", "🏎", "🏍", "🚑", "🚲", "🚂", "🛸", "🚁"]
     var buildings = ["🏠", "🏨", "💒", "🏣", "🏭", "🏪", "🏦", "🕌", "🏩", "🏛", "🏬", "🕍", "🏥", "⛩"]
     var food = ["🍏", "🍐", "🍊", "🍋", "🍌", "🍉", "🍓", "🍒", "🥥", "🍑", "🍆", "🥑", "🥦", "🥕", "🥐"]
@@ -25,9 +27,12 @@ struct ContentView: View {
                 .padding(.vertical)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                        CardView(content: emoji)
+                    ForEach(game.cards) { card in
+                        CardView(card: card)
                             .aspectRatio(2/3, contentMode: .fit)
+                            .onTapGesture {
+                                game.choose(card)
+                            }
                     }
                 }
             }
@@ -96,39 +101,36 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    var content: String
-    @State var isFaceUp: Bool = true
+    let card: MemoryGame<String>.Card
     
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
-            if isFaceUp {
+            if card.isFaceUp {
                 shape.fill().foregroundColor(.white)
                 shape.strokeBorder(lineWidth: 3)
-                Text(content).font(.largeTitle)
+                Text(card.content).font(.largeTitle)
             } else {
                 shape.fill()
             }
-        }
-        .onTapGesture {
-            isFaceUp = !isFaceUp
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let emojiGame = EmojiMemoryGame()
+        ContentView(game: emojiGame)
             .previewDevice("iPhone 14")
             .preferredColorScheme(.light)
-        ContentView()
-            .previewDevice("iPhone 14 Plus")
-            .preferredColorScheme(.light)
-        ContentView()
-            .previewDevice("iPhone 14 Pro")
-            .preferredColorScheme(.dark)
-        ContentView()
-            .previewDevice("iPhone 14 Pro Max")
-            .preferredColorScheme(.dark)
+//        ContentView(game: emojiGame)
+//            .previewDevice("iPhone 14 Plus")
+//            .preferredColorScheme(.light)
+//        ContentView(game: emojiGame)
+//            .previewDevice("iPhone 14 Pro")
+//            .preferredColorScheme(.dark)
+//        ContentView(game: emojiGame)
+//            .previewDevice("iPhone 14 Pro Max")
+//            .preferredColorScheme(.dark)
     }
 }
