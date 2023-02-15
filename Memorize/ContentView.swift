@@ -52,7 +52,7 @@ struct ContentView: View {
 //        }
 //        .padding(.horizontal)
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))], spacing: 10) {
                 ForEach(game.cards) { card in
                     CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit)
@@ -136,16 +136,16 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let emojiGame = EmojiMemoryGame()
         ContentView(game: emojiGame)
-            //.previewDevice("iPhone 14")
+            .previewDevice("iPhone 14")
             .preferredColorScheme(.light)
-//        ContentView(game: emojiGame)
-//            .previewDevice("iPhone 14 Plus")
-//            .preferredColorScheme(.light)
-//        ContentView(game: emojiGame)
-//            .previewDevice("iPhone 14 Pro")
-//            .preferredColorScheme(.dark)
-//        ContentView(game: emojiGame)
-//            .previewDevice("iPhone 14 Pro Max")
-//            .preferredColorScheme(.dark)
+        ContentView(game: emojiGame)
+            .previewDevice("iPhone 14 Plus")
+            .preferredColorScheme(.light)
+        ContentView(game: emojiGame)
+            .previewDevice("iPhone 14 Pro")
+            .preferredColorScheme(.dark)
+        ContentView(game: emojiGame)
+            .previewDevice("iPhone 14 Pro Max")
+            .preferredColorScheme(.dark)
     }
 }
