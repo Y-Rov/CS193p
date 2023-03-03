@@ -11,19 +11,36 @@ struct ContentView: View {
     @ObservedObject var game: EmojiMemoryGame
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))], spacing: 10) {
-                ForEach(game.cards) { card in
-                    CardView(card: card)
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .onTapGesture {
-                            game.choose(card)
+        VStack {
+            HStack {
+                Text("Score: ")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Spacer()
+                Button(action: {
+                    
+                }, label: {
+                    Text("New game")
+                })
+            }
+            .padding(.horizontal)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))], spacing: 8) {
+                    ForEach(game.cards) { card in
+                        CardView(card: card)
+                            .aspectRatio(2/3, contentMode: .fit)
+                            .onTapGesture {
+                                game.choose(card)
+                            }
                     }
                 }
             }
+            .foregroundColor(.red)
+            .padding(.horizontal)
+            Text("Theme name")
+                .font(.title)
+                .fontWeight(.bold)
         }
-        .foregroundColor(.red)
-        .padding(.horizontal)
     }
 }
 
@@ -49,17 +66,10 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let emojiGame = EmojiMemoryGame()
+        
         ContentView(game: emojiGame)
-            .previewDevice("iPhone 14")
             .preferredColorScheme(.light)
         ContentView(game: emojiGame)
-            .previewDevice("iPhone 14 Plus")
-            .preferredColorScheme(.light)
-        ContentView(game: emojiGame)
-            .previewDevice("iPhone 14 Pro")
-            .preferredColorScheme(.dark)
-        ContentView(game: emojiGame)
-            .previewDevice("iPhone 14 Pro Max")
             .preferredColorScheme(.dark)
     }
 }

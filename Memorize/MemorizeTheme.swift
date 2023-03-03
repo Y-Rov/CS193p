@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct GameTheme {
+struct MemorizeTheme {
     var name: String
-    var emojis: Set<String>
+    var emojis: Array<String>
     var numberOfPairsOfCards: Int
     var color: String
 }
