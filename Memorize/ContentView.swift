@@ -13,12 +13,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Score: ")
+                Text("Score: " + String(game.playerScore))
                     .font(.title)
                     .fontWeight(.bold)
                 Spacer()
                 Button(action: {
-                    
+                    game.start()
                 }, label: {
                     Text("New game")
                 })
@@ -35,9 +35,9 @@ struct ContentView: View {
                     }
                 }
             }
-            .foregroundColor(.red)
+            .foregroundColor(game.themeColor)
             .padding(.horizontal)
-            Text("Theme name")
+            Text("Theme: " + game.themeName)
                 .font(.title)
                 .fontWeight(.bold)
         }
