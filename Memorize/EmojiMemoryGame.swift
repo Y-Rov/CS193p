@@ -9,16 +9,16 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     private static let themes: [MemorizeTheme] = [
-        MemorizeTheme(name: "Transport", emojis: ["🚄", "🚃", "🚠"], numberOfPairsOfCards: 4, color: "blue"),
-        MemorizeTheme(name: "Sport", emojis: ["⚽️", "🏀", "🏈", "⚾️"], numberOfPairsOfCards: 23, color: "red"),
-        MemorizeTheme(name: "Food", emojis: ["🍓", "🍋", "🍐", "🍉", "🍏"], numberOfPairsOfCards: 5, color: "fuchsia"),
-        MemorizeTheme(name: "Drinks", emojis: ["🍷", "🍺", "🍸", "🍹", "🍾", "🥛"], numberOfPairsOfCards: 7, color: "brown"),
-        MemorizeTheme(name: "People", emojis: ["👮‍♀️", "👩‍🎓", "👷‍♂️", "👩‍🏫", "👩‍🏭", "👩‍🚒", "👩‍💻"], numberOfPairsOfCards: 7, color: "yellow"),
-        MemorizeTheme(name: "Devices", emojis: ["⌚️", "📱", "💻", "🖥", "🖱", "💾", "📷", "⏳"], numberOfPairsOfCards: 6, color: "black"),
-        MemorizeTheme(name: "Flags", emojis: ["🇦🇹", "🇹🇩", "🇧🇬", "🇨🇿", "🇮🇪", "🇺🇦", "🇺🇸", "🇬🇧", "🇪🇸"], numberOfPairsOfCards: 9, color: "orange"),
-        MemorizeTheme(name: "Symbols", emojis: ["❤️", "💖", "✡️", "☯️", "♋️", "💔", "❤️‍🩹", "💕", "🆘", "⛔️"], numberOfPairsOfCards: 9, color: "purple"),
-        MemorizeTheme(name: "Nature", emojis: ["🪷", "🌸", "🌻", "🌹", "🪴", "🐚", "🍄", "🍀", "🌵", "🎄"], numberOfPairsOfCards: 10, color: "green"),
-        MemorizeTheme(name: "Animals", emojis: ["🐝", "🐌", "🐜", "🦄", "🦅", "🐳", "🦣", "🐬", "🐍"], numberOfPairsOfCards: 9, color: "cyan")
+        MemorizeTheme(name: "Transport", emojis: ["🚄", "🚃", "🚠"], numberOfPairsOfCards: 4, colors: ["orange"]),
+        MemorizeTheme(name: "Sport", emojis: ["⚽️", "🏀", "🏈", "⚾️"], numberOfPairsOfCards: 23, colors: ["red", "green"]),
+        MemorizeTheme(name: "Food", emojis: ["🍓", "🍋", "🍐", "🍉", "🍏"], colors: ["fuchsia"]),
+        MemorizeTheme(name: "Drinks", emojis: ["🍷", "🍺", "🍸", "🍹", "🍾", "🥛"], numberOfPairsOfCards: 7, colors: ["brown"]),
+        MemorizeTheme(name: "People", emojis: ["👮‍♀️", "👩‍🎓", "👷‍♂️", "👩‍🏫", "👩‍🏭", "👩‍🚒", "👩‍💻"], isNumberOfPairsOfCardsRandom: true, colors: ["yellow"]),
+        MemorizeTheme(name: "Devices", emojis: ["⌚️", "📱", "💻", "🖥", "🖱", "💾", "📷", "⏳"], numberOfPairsOfCards: 6, colors: ["black"]),
+        MemorizeTheme(name: "Flags", emojis: ["🇦🇹", "🇹🇩", "🇧🇬", "🇨🇿", "🇮🇪", "🇺🇦", "🇺🇸", "🇬🇧", "🇪🇸"], numberOfPairsOfCards: 9, colors: ["blue", "yellow"]),
+        MemorizeTheme(name: "Symbols", emojis: ["❤️", "💖", "✡️", "☯️", "♋️", "💔", "❤️‍🩹", "💕", "🆘", "⛔️"], colors: ["purple"]),
+        MemorizeTheme(name: "Nature", emojis: ["🪷", "🌸", "🌻", "🌹", "🪴", "🐚", "🍄", "🍀", "🌵", "🎄"], isNumberOfPairsOfCardsRandom: true, colors: ["green"]),
+        MemorizeTheme(name: "Animals", emojis: ["🐝", "🐌", "🐜", "🦄", "🦅", "🐳", "🦣", "🐬", "🐍"], colors: ["green", "cyan"])
     ]
     
     private static let colors: [String: Color] = [
@@ -31,7 +31,8 @@ class EmojiMemoryGame: ObservableObject {
         "orange": Color.orange,
         "purple": Color.purple,
         "green": Color.green,
-        "cyan": Color.cyan
+        "cyan": Color.cyan,
+        "white": Color.white
     ]
     
     private static func createMemoryGame(with theme: MemorizeTheme) -> MemoryGame<String> {
@@ -56,13 +57,17 @@ class EmojiMemoryGame: ObservableObject {
         currentGameTheme.name
     }
     
-    var themeColor: Color {
-        let color = EmojiMemoryGame.colors[currentGameTheme.color]
-        if color == nil {
-            return Color.red
+    var themeColor: Gradient {
+        var themeColors = Array<Color>()
+        for themeColor in currentGameTheme.colors {
+            if let color = EmojiMemoryGame.colors[themeColor] {
+                themeColors.append(color)
+            } else {
+                themeColors.append(.red)
+            }
         }
         
-        return color!
+        return Gradient(colors: themeColors)
     }
     
     init() {
@@ -88,6 +93,10 @@ class EmojiMemoryGame: ObservableObject {
         
         if randomGameTheme.numberOfPairsOfCards > randomGameTheme.emojis.count {
             randomGameTheme.numberOfPairsOfCards = randomGameTheme.emojis.count
+        }
+        
+        if randomGameTheme.isNumberOfPairsOfCardsRandom {
+            randomGameTheme.numberOfPairsOfCards = Int.random(in: randomGameTheme.minNumberOfPairsOfCards...randomGameTheme.emojis.count)
         }
         
         currentGameTheme = randomGameTheme
