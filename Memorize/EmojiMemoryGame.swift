@@ -8,7 +8,9 @@
 import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
-    private static let themes: [MemorizeTheme] = [
+    typealias Card = MemoryGame<String>.Card
+    
+    private static let themes = [
         MemorizeTheme(name: "Transport", emojis: ["🚄", "🚃", "🚠"], numberOfPairsOfCards: 4, colors: ["orange"]),
         MemorizeTheme(name: "Sport", emojis: ["⚽️", "🏀", "🏈", "⚾️"], numberOfPairsOfCards: 23, colors: ["red", "green"]),
         MemorizeTheme(name: "Food", emojis: ["🍓", "🍋", "🍐", "🍉", "🍏"], colors: ["fuchsia"]),
@@ -45,7 +47,17 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var currentGameTheme: MemorizeTheme
     @Published private var model: MemoryGame<String>
     
-    var cards: Array<MemoryGame<String>.Card> {
+    init() {
+        var randomGameTheme = EmojiMemoryGame.themes.randomElement()!
+        if randomGameTheme.numberOfPairsOfCards > randomGameTheme.emojis.count {
+            randomGameTheme.numberOfPairsOfCards = randomGameTheme.emojis.count
+        }
+        
+        currentGameTheme = randomGameTheme
+        model = EmojiMemoryGame.createMemoryGame(with: randomGameTheme)
+    }
+    
+    var cards: Array<Card> {
         model.cards
     }
     
@@ -57,7 +69,7 @@ class EmojiMemoryGame: ObservableObject {
         currentGameTheme.name
     }
     
-    var themeColor: Gradient {
+    var themeColors: Gradient {
         var themeColors = Array<Color>()
         for themeColor in currentGameTheme.colors {
             if let color = EmojiMemoryGame.colors[themeColor] {
@@ -70,18 +82,8 @@ class EmojiMemoryGame: ObservableObject {
         return Gradient(colors: themeColors)
     }
     
-    init() {
-        var randomGameTheme = EmojiMemoryGame.themes.randomElement()!
-        if randomGameTheme.numberOfPairsOfCards > randomGameTheme.emojis.count {
-            randomGameTheme.numberOfPairsOfCards = randomGameTheme.emojis.count
-        }
-        
-        currentGameTheme = randomGameTheme
-        model = EmojiMemoryGame.createMemoryGame(with: randomGameTheme)
-    }
-    
     // MARK: - Intent(s)
-    func choose(_ card: MemoryGame<String>.Card) {
+    func choose(_ card: Card) {
         model.choose(card)
     }
     

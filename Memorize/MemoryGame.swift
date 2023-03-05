@@ -10,12 +10,36 @@ import Foundation
 struct MemoryGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     
-    private var indexOfTheOneAndOnlyFaceUpCard: Int?
-    private(set) var score: Int = 0
-    private let matchValue: Int = 2
-    private let penaltyValue: Int = -1
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            if faceUpCardIndices.count == 1 {
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+        }
+        set {
+            firstChosenCardTime = Date.now
+            for index in cards.indices {
+                if index != newValue {
+                    cards[index].isFaceUp = false
+                } else {
+                    cards[index].isFaceUp = true
+                }
+            }
+        }
+    }
+    private(set) var score = 0
+    private let matchValue = 2
+    private let penaltyValue = -1
     // Extra Credit 4
-    private var firstChosenCardTime: Date = Date.now
+    private var firstChosenCardTime = Date.now
     
     mutating func choose(_ card: Card) {
         if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }),
@@ -35,16 +59,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     score += cards[chosenIndex].alreadyBeenSeen ? finalPenaltyValue : Int.zero
                     score += cards[potentialMatchIndex].alreadyBeenSeen ? finalPenaltyValue : Int.zero
                 }
-                    
+                cards[chosenIndex].isFaceUp = true
                 cards[chosenIndex].alreadyBeenSeen = true
                 cards[potentialMatchIndex].alreadyBeenSeen = true
-                indexOfTheOneAndOnlyFaceUpCard = nil
             } else {
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
-                firstChosenCardTime = Date.now
             }
             cards[chosenIndex].isFaceUp.toggle()
         }
@@ -62,10 +81,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     struct Card: Identifiable {
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
-        var alreadyBeenSeen: Bool = false
-        var content: CardContent
-        var id: Int
+        var isFaceUp = false
+        var isMatched = false
+        var alreadyBeenSeen = false
+        let content: CardContent
+        let id: Int
     }
 }
