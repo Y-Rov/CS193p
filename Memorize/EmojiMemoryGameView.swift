@@ -13,18 +13,13 @@ struct EmojiMemoryGameView: View {
     var body: some View {
         VStack {
             header
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))], spacing: 8) {
-                    ForEach(game.cards) { card in
-                        CardView(card: card, gradient: game.themeColors)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                game.choose(card)
-                            }
+            AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+                CardView(card: card, gradient: game.themeColors)
+                    .padding(4)
+                    .onTapGesture {
+                        game.choose(card)
                     }
-                }
             }
-            .padding(.horizontal)
             Text("Theme: " + game.themeName)
                 .font(.title)
                 .fontWeight(.bold)
@@ -76,9 +71,9 @@ struct CardView: View {
     }
     
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 20
+        static let cornerRadius: CGFloat = 10
         static let lineWidth: CGFloat = 3
-        static let fontScale: CGFloat = 0.8
+        static let fontScale: CGFloat = 0.75
     }
 }
 
