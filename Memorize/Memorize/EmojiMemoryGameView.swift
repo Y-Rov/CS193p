@@ -20,10 +20,9 @@ struct EmojiMemoryGameView: View {
                         game.choose(card)
                     }
             }
-            Text("Theme: " + game.themeName)
-                .font(.title)
-                .fontWeight(.bold)
+            footer
         }
+        .padding(.horizontal)
     }
     
     var header: some View {
@@ -38,7 +37,12 @@ struct EmojiMemoryGameView: View {
                 Text("New game")
             })
         }
-        .padding(.horizontal)
+    }
+    
+    var footer: some View {
+        Text(game.themeName)
+            .font(.largeTitle)
+            .fontWeight(.bold)
     }
 }
 
@@ -55,7 +59,7 @@ struct CardView: View {
                     shape.fill().foregroundColor(.white)
                     shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
                         .foregroundColor(gradient.stops.first!.color)
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 180-90)).padding(5)
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 180-90)).padding(4)
                         .foregroundColor(gradient.stops.first!.color)
                         .opacity(DrawingConstants.opacity)
                     Text(card.content).font(font(in: geometry.size))
