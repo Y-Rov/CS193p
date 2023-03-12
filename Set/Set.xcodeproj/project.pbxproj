@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		CEA7839929BCA7AF00D701FA /* SetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7839829BCA7AF00D701FA /* SetApp.swift */; };
-		CEA7839B29BCA7AF00D701FA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7839A29BCA7AF00D701FA /* ContentView.swift */; };
+		CEA7839B29BCA7AF00D701FA /* SetGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7839A29BCA7AF00D701FA /* SetGameView.swift */; };
 		CEA7839D29BCA7B100D701FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA7839C29BCA7B100D701FA /* Assets.xcassets */; };
 		CEA783A029BCA7B100D701FA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA7839F29BCA7B100D701FA /* Preview Assets.xcassets */; };
+		CEA9550C29BE0F10000DC6A1 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */; };
+		CEA9550E29BE1165000DC6A1 /* SetStandardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */; };
+		CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550F29BE11E5000DC6A1 /* SetGame.swift */; };
+		CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CEA7839529BCA7AF00D701FA /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA7839829BCA7AF00D701FA /* SetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetApp.swift; sourceTree = "<group>"; };
-		CEA7839A29BCA7AF00D701FA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CEA7839A29BCA7AF00D701FA /* SetGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGameView.swift; sourceTree = "<group>"; };
 		CEA7839C29BCA7B100D701FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEA7839F29BCA7B100D701FA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
+		CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStandardGame.swift; sourceTree = "<group>"; };
+		CEA9550F29BE11E5000DC6A1 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
+		CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +60,11 @@
 			isa = PBXGroup;
 			children = (
 				CEA7839829BCA7AF00D701FA /* SetApp.swift */,
-				CEA7839A29BCA7AF00D701FA /* ContentView.swift */,
+				CEA7839A29BCA7AF00D701FA /* SetGameView.swift */,
+				CEA9550F29BE11E5000DC6A1 /* SetGame.swift */,
+				CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */,
+				CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */,
+				CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */,
 				CEA7839C29BCA7B100D701FA /* Assets.xcassets */,
 				CEA7839E29BCA7B100D701FA /* Preview Content */,
 			);
@@ -137,8 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA7839B29BCA7AF00D701FA /* ContentView.swift in Sources */,
+				CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */,
+				CEA7839B29BCA7AF00D701FA /* SetGameView.swift in Sources */,
 				CEA7839929BCA7AF00D701FA /* SetApp.swift in Sources */,
+				CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */,
+				CEA9550C29BE0F10000DC6A1 /* AspectVGrid.swift in Sources */,
+				CEA9550E29BE1165000DC6A1 /* SetStandardGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

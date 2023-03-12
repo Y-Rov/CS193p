@@ -34,7 +34,7 @@ struct EmojiMemoryGameView: View {
             Button(action: {
                 game.start()
             }, label: {
-                Text("New game")
+                Text("New Game")
             })
         }
     }
