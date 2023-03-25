@@ -15,6 +15,7 @@
 		CEA9550E29BE1165000DC6A1 /* SetStandardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */; };
 		CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550F29BE11E5000DC6A1 /* SetGame.swift */; };
 		CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */; };
+		CEAA601729CEF81D00F95808 /* SetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA601629CEF81D00F95808 /* SetState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStandardGame.swift; sourceTree = "<group>"; };
 		CEA9550F29BE11E5000DC6A1 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardContent.swift; sourceTree = "<group>"; };
+		CEAA601629CEF81D00F95808 /* SetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */,
 				CEA7839C29BCA7B100D701FA /* Assets.xcassets */,
 				CEA7839E29BCA7B100D701FA /* Preview Content */,
+				CEAA601629CEF81D00F95808 /* SetState.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */,
 				CEA7839B29BCA7AF00D701FA /* SetGameView.swift in Sources */,
+				CEAA601729CEF81D00F95808 /* SetState.swift in Sources */,
 				CEA7839929BCA7AF00D701FA /* SetApp.swift in Sources */,
 				CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */,
 				CEA9550C29BE0F10000DC6A1 /* AspectVGrid.swift in Sources */,
@@ -283,6 +287,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Set/Preview Content\"";
+				DEVELOPMENT_TEAM = C9Q7U2Z69T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -290,6 +295,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,6 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Set/Preview Content\"";
+				DEVELOPMENT_TEAM = C9Q7U2Z69T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -318,6 +325,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
