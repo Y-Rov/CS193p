@@ -8,80 +8,72 @@
 import SwiftUI
 
 class SetStandardGame: ObservableObject {
-    typealias Card = SetGame<SetCardContent>.Card
+    typealias Card = SetGame.Card
+    typealias GameState = SetGame.GameState
     
     private static let numbersOfShapes = 1...3
     private static let shapes = ["diamond", "squiggle", "oval"]
     private static let shadings = ["solid", "striped", "open"]
     private static let colors = ["red", "green", "purple"]
     
-    private static var startGameDeck: Array<SetCardContent> = []
-    private var currentGameDeck: Array<SetCardContent>
+    private var startGameDeck: Array<SetStandardCardContent>
     
-    @Published private var setGame: SetGame<SetCardContent>
+    @Published private var setGame: SetGame
+    @Published private(set) var isDealThreeMoreCardsDisabled = false
     
     var cards: Array<Card> {
         setGame.cards
     }
     
-    var status: SetState? {
-        setGame.currentSetState
+    var status: GameState? {
+        setGame.currentGameState
     }
     
-    @Published private(set) var isDealThreeMoreCardsDisabled = false
-    
-    private static func createSetGame(with firstTwelveCards: ArraySlice<SetCardContent>) -> SetGame<SetCardContent> {
-        SetGame<SetCardContent>(numberOfCards: GameConstants.startCardsQuantity) { index in
+    private static func createSetGame(deck: Array<SetStandardCardContent>) -> SetGame {
+        let firstTwelveCards = deck[0..<GameConstants.startCardsQuantity]
+        return SetGame(numberOfCards: GameConstants.startCardsQuantity, deck: deck) { index in
             firstTwelveCards[index]
         }
     }
     
     init() {
-        SetStandardGame.startGameDeck.reserveCapacity(GameConstants.allCardsQuantity)
+        startGameDeck = []
+        startGameDeck.reserveCapacity(GameConstants.allCardsQuantity)
         for number in SetStandardGame.numbersOfShapes {
-            for shape in SetStandardGame.shapes {
-                for shading in SetStandardGame.shadings {
-                    for color in SetStandardGame.colors {
-                        SetStandardGame.startGameDeck.append(SetCardContent(numberOfShapes: number, shading: shading,
-                                                                            color: color, shape: shape))
+            for shading in SetStandardGame.shadings {
+                for color in SetStandardGame.colors {
+                    for shape in SetStandardGame.shapes {
+                        startGameDeck.append(SetStandardCardContent(numberOfShapes: number, shading: shading, color: color, shape: shape))
                     }
                 }
             }
         }
-        currentGameDeck = SetStandardGame.startGameDeck.shuffled()
-        setGame = SetStandardGame.createSetGame(with: currentGameDeck[0..<GameConstants.startCardsQuantity])
-        currentGameDeck.removeSubrange(0..<GameConstants.startCardsQuantity)
-    }
-    
-    private struct GameConstants {
-        static let allCardsQuantity = 81
-        static let startCardsQuantity = 12
-        static let three = 3
+        //let shuffledDeck = startGameDeck.shuffled()
+        let shuffledDeck = startGameDeck
+        setGame = SetStandardGame.createSetGame(deck: shuffledDeck)
     }
     
     // MARK: - Intents
-    func start() {
-        let shuffledDeck = SetStandardGame.startGameDeck.shuffled()
-        setGame = SetStandardGame.createSetGame(with: shuffledDeck[0..<GameConstants.startCardsQuantity])
-        currentGameDeck = shuffledDeck
-        currentGameDeck.removeSubrange(0..<GameConstants.startCardsQuantity)
-        isDealThreeMoreCardsDisabled = false
+    func dealThreeMoreCards() {
+        if setGame.addThreeMoreCards() {
+            isDealThreeMoreCardsDisabled = true
+        }
     }
     
-    func dealThreeMoreCards() {
-        let randomIndex = Int.random(in: 0...currentGameDeck.count - GameConstants.three)
-        setGame.addThreeMoreCards(from: currentGameDeck[randomIndex..<randomIndex + GameConstants.three])
-        removeThreeCardsFromCurrentDeck(startIndex: randomIndex)
+    func start() {
+        let shuffledDeck = startGameDeck.shuffled()
+        setGame = SetStandardGame.createSetGame(deck: shuffledDeck)
+        isDealThreeMoreCardsDisabled = false
     }
     
     func choose(_ card: Card) {
         setGame.choose(card)
     }
     
-    private func removeThreeCardsFromCurrentDeck(startIndex: Int) {
-        currentGameDeck.removeSubrange(startIndex..<startIndex + GameConstants.three)
-        if currentGameDeck.isEmpty {
-            isDealThreeMoreCardsDisabled = true
-        }
+    // MARK: - Private constants
+    private struct GameConstants {
+        static let allCardsQuantity = 81
+        static let startCardsQuantity = 12
+        static let three = 3
     }
 }

@@ -14,8 +14,7 @@
 		CEA9550C29BE0F10000DC6A1 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */; };
 		CEA9550E29BE1165000DC6A1 /* SetStandardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */; };
 		CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9550F29BE11E5000DC6A1 /* SetGame.swift */; };
-		CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */; };
-		CEAA601729CEF81D00F95808 /* SetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAA601629CEF81D00F95808 /* SetState.swift */; };
+		CEA9551229BE19A1000DC6A1 /* SetStandardCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA9551129BE19A1000DC6A1 /* SetStandardCardContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +26,7 @@
 		CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
 		CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStandardGame.swift; sourceTree = "<group>"; };
 		CEA9550F29BE11E5000DC6A1 /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
-		CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCardContent.swift; sourceTree = "<group>"; };
-		CEAA601629CEF81D00F95808 /* SetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetState.swift; sourceTree = "<group>"; };
+		CEA9551129BE19A1000DC6A1 /* SetStandardCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetStandardCardContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +64,9 @@
 				CEA9550F29BE11E5000DC6A1 /* SetGame.swift */,
 				CEA9550B29BE0F10000DC6A1 /* AspectVGrid.swift */,
 				CEA9550D29BE1165000DC6A1 /* SetStandardGame.swift */,
-				CEA9551129BE19A1000DC6A1 /* SetCardContent.swift */,
+				CEA9551129BE19A1000DC6A1 /* SetStandardCardContent.swift */,
 				CEA7839C29BCA7B100D701FA /* Assets.xcassets */,
 				CEA7839E29BCA7B100D701FA /* Preview Content */,
-				CEAA601629CEF81D00F95808 /* SetState.swift */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -152,9 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA9551229BE19A1000DC6A1 /* SetCardContent.swift in Sources */,
+				CEA9551229BE19A1000DC6A1 /* SetStandardCardContent.swift in Sources */,
 				CEA7839B29BCA7AF00D701FA /* SetGameView.swift in Sources */,
-				CEAA601729CEF81D00F95808 /* SetState.swift in Sources */,
 				CEA7839929BCA7AF00D701FA /* SetApp.swift in Sources */,
 				CEA9551029BE11E5000DC6A1 /* SetGame.swift in Sources */,
 				CEA9550C29BE0F10000DC6A1 /* AspectVGrid.swift in Sources */,
@@ -287,7 +283,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Set/Preview Content\"";
-				DEVELOPMENT_TEAM = C9Q7U2Z69T;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -317,7 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Set/Preview Content\"";
-				DEVELOPMENT_TEAM = C9Q7U2Z69T;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -4,7 +4,6 @@
 //
 //  Created by user on 3/11/23.
 //
-
 import SwiftUI
 
 struct SetGameView: View {
@@ -14,11 +13,8 @@ struct SetGameView: View {
         VStack {
             header
             AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
-                CardView(game: game, card: card)
+                CardView(card: card, game: game)
                     .padding(4)
-                    .onTapGesture {
-                        game.choose(card)
-                    }
             }
         }
         .padding(.horizontal)
@@ -32,36 +28,38 @@ struct SetGameView: View {
                 Text("Deal 3 More Cards")
             })
             .disabled(game.isDealThreeMoreCardsDisabled)
+            
             Spacer()
-            Button {
+            Button(action: {
                 game.start()
-            } label: {
+            }, label: {
                 Text("New Game")
-            }
+            })
         }
     }
 }
 
 struct CardView: View {
-    let game: SetStandardGame
     let card: SetStandardGame.Card
+    let game: SetStandardGame
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
                 shape.fill().foregroundColor(.white)
+                
                 if card.isIncludedInSet {
-                    shape.strokeBorder(lineWidth: shiftedLineWidth()).foregroundColor(.gray.opacity(1))
+                    shape.strokeBorder(lineWidth: increasedLineWidth()).foregroundColor(.gray.opacity(1))
                 } else {
                     shape.strokeBorder(lineWidth: DrawingConstants.lineWidth).foregroundColor(.gray)
                 }
                 
                 if game.status == .final {
-                    if card.isMatched {
-                        shape.strokeBorder(lineWidth: shiftedLineWidth()).foregroundColor(.green)
-                    } else if card.isIncludedInSet {
-                        shape.strokeBorder(lineWidth: shiftedLineWidth()).foregroundColor(.red)
+                    if card.state == .final {
+                        shape.strokeBorder(lineWidth: increasedLineWidth()).foregroundColor(.green)
+                    } else {
+                        shape.strokeBorder(lineWidth: increasedLineWidth()).foregroundColor(.red)
                     }
                 }
                 
@@ -71,12 +69,14 @@ struct CardView: View {
                     Text(card.content.color)
                     Text(card.content.shape)
                 }
-                
+            }
+            .onTapGesture {
+                game.choose(card)
             }
         }
     }
     
-    private func shiftedLineWidth() -> CGFloat {
+    private func increasedLineWidth() -> CGFloat {
         DrawingConstants.lineWidth + DrawingConstants.lineWidthShift
     }
     
@@ -97,8 +97,5 @@ struct SetGameView_Previews: PreviewProvider {
     static var previews: some View {
         let setGame = SetStandardGame()
         SetGameView(game: setGame)
-            .preferredColorScheme(.light)
-        SetGameView(game: setGame)
-            .preferredColorScheme(.dark)
     }
 }
